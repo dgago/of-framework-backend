@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace of.data
 {
@@ -28,11 +29,16 @@ namespace of.data
 
 		public int PageCount { get; set; }
 
+		public Results<T> AsObjects<T>() where T : class
+		{
+			return new Results<T>(Items.Cast<T>().ToList(), Count, PageIndex, PageSize);
+		}
+
 		#region helpers
 
 		protected int CalculatePageCount(long count, int pageSize)
 		{
-			return (int)Math.Ceiling((double)count / pageSize);
+			return (int) Math.Ceiling((double) count / pageSize);
 		}
 
 		#endregion

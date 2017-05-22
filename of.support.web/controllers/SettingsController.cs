@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 
 using of.data;
 using of.support.configuration;
@@ -11,13 +10,18 @@ namespace of.support.web.controllers
 	{
 		public SettingsController(ISettingManager manager) : base(manager)
 		{
+			UseViewModel = true;
 		}
 
-		protected override async Task<object> FindAllAsync(IEnumerable<KeyValuePair<string, string>> qs, int? pageIndex, int? pageSize)
+		protected override Results<object> GetViewModel(Results<Setting> results)
 		{
-			Results<Setting> res = (Results<Setting>) await base.FindAllAsync(qs, pageIndex, pageSize);
-			List<dynamic> list = res.Items.ToDynamicList();
-			return new Results<object>(list, res.Count, res.PageIndex, res.PageSize);
+			List<dynamic> list = results.Items.ToDynamicList();
+			return new Results<object>(list, results.Count, results.PageIndex, results.PageSize);
+		}
+
+		protected override object GetViewModel(Setting item)
+		{
+			return Extensions.ToDynamic(item);
 		}
 	}
 }

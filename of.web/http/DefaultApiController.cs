@@ -21,18 +21,20 @@ namespace of.web.http
 		public async Task<IHttpActionResult> Get([FromUri] int? pageIndex = null, [FromUri] int? pageSize = null)
 		{
 			IEnumerable<KeyValuePair<string, string>> qs = Request.GetQueryNameValuePairs();
-			object es = await FindAllAsync(qs, pageIndex, pageSize);
-			return Ok(es);
+			Results<TItem> results = await _manager.FindAsync(User, qs, pageIndex ?? 1, pageSize ?? MAX_RECORDS);
+
+			return UseViewModel ? OkCount(GetViewModel(results)) : OkCount(results);
 		}
 
 		public async Task<IHttpActionResult> GetOne([FromUri] TKey id)
 		{
-			object res = await FindOneAsync(id);
+			TItem res = await _manager.FindOneAsync(User, id);
 			if (res == null)
 			{
 				return NotFound();
 			}
-			return Ok(res);
+
+			return Ok(UseViewModel ? GetViewModel(res) : res);
 		}
 
 		public async Task<IHttpActionResult> Post(TItem item)
@@ -53,18 +55,14 @@ namespace of.web.http
 			return NoContent();
 		}
 
-		#region helpers
-
-		protected virtual async Task<object> FindAllAsync(IEnumerable<KeyValuePair<string, string>> qs, int? pageIndex, int? pageSize)
+		protected virtual Results<object> GetViewModel(Results<TItem> results)
 		{
-			return await _manager.FindAsync(User, qs, pageIndex ?? 1, pageSize ?? MAX_RECORDS);
+			return results.AsObjects<object>();
 		}
 
-		protected virtual async Task<object> FindOneAsync(TKey id)
+		protected virtual object GetViewModel(TItem item)
 		{
-			return await _manager.FindOneAsync(User, id);
+			return item;
 		}
-
-		#endregion
 	}
 }

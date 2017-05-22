@@ -18,11 +18,12 @@ namespace of.web.http
 		}
 
 		[PaginationFilter]
-		public async Task<IHttpActionResult> GetAll([FromUri] TKey id, [FromUri] int? pageIndex = null, [FromUri] int? pageSize = null)
+		public async Task<IHttpActionResult> Get([FromUri] TKey id, [FromUri] int? pageIndex = null, [FromUri] int? pageSize = null)
 		{
 			IEnumerable<KeyValuePair<string, string>> qs = Request.GetQueryNameValuePairs();
 			Results<TItem> results = await _manager.Find(User, id, qs, pageIndex ?? 1, pageSize ?? MAX_RECORDS);
-			return OkCount(results);
+
+			return UseViewModel ? OkCount(GetViewModel(results)) : OkCount(results);
 		}
 
 		public async Task<IHttpActionResult> GetOne([FromUri] TKey id, [FromUri] TKey childId)
@@ -51,6 +52,11 @@ namespace of.web.http
 		{
 			await _manager.Delete(User, id, childId);
 			return NoContent();
+		}
+
+		protected virtual Results<object> GetViewModel(Results<TItem> results)
+		{
+			return results.AsObjects<object>();
 		}
 	}
 }

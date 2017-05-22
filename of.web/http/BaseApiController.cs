@@ -18,6 +18,7 @@ namespace of.web.http
 	public class BaseApiController : ApiController
 	{
 		protected const int MAX_RECORDS = 300;
+		protected bool UseViewModel = false;
 
 		public BaseApiController()
 		{
@@ -46,10 +47,11 @@ namespace of.web.http
 			return StatusCode(HttpStatusCode.NoContent);
 		}
 
-		protected IHttpActionResult OkCount<TItem>(Results<TItem> results)
+		protected IHttpActionResult OkCount<T>(Results<T> item)
 		{
-			Request.Properties["Count"] = results.Count;
-			return Ok(results.Items);
+			Request.Properties["Count"] = item.Count;
+
+			return Ok(item.Items);
 		}
 
 		#region helpers
@@ -61,6 +63,5 @@ namespace of.web.http
 		}
 
 		#endregion
-
 	}
 }
