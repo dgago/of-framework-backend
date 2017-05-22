@@ -22,7 +22,7 @@ namespace test.server.api
 			app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
 			{
 				Authority = "http://localhost:30080",
-				ValidationMode = ValidationMode.ValidationEndpoint,
+				ValidationMode = ValidationMode.Both,
 
 				RequiredScopes = new[] { "api1" }
 			});

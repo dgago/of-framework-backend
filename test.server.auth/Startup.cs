@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Security.Cryptography.X509Certificates;
 
 using IdentityServer3.Core.Configuration;
 
@@ -34,8 +35,16 @@ namespace test.server.auth
 			app.UseIdentityServer(new IdentityServerOptions
 			{
 				Factory = factory,
-				RequireSsl = false
+				RequireSsl = false,
+				SigningCertificate = LoadCertificate()
 			});
+		}
+
+		X509Certificate2 LoadCertificate()
+		{
+			string fileName = $@"{AppDomain.CurrentDomain.BaseDirectory}\bin\idsrv3test.pfx";
+			X509Certificate2 cert = new X509Certificate2(fileName, "idsrv3test");
+			return cert;
 		}
 	}
 }
