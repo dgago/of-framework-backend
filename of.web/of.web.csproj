@@ -103,6 +103,7 @@
     <Compile Include="..\of\Properties\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="controllers\VersionController.cs" />
     <Compile Include="http\BaseApiController.cs" />
     <Compile Include="http\ChildApiController.cs" />
     <Compile Include="http\DefaultApiController.cs" />
@@ -131,7 +132,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>nuget pack ..\..\$(ProjectName).csproj -IncludeReferencedProjects -OutputDirectory ..\..\</PostBuildEvent>
+    <PostBuildEvent>nuget pack ..\..\$(ProjectName).csproj -IncludeReferencedProjects -OutputDirectory ..\..\..\nuget</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
