@@ -110,6 +110,7 @@
     <Compile Include="http\dependencies\ApiUnityDependencyResolver.cs" />
     <Compile Include="http\filter\OfExceptionFilterAttribute.cs" />
     <Compile Include="http\filter\PaginationFilterAttribute.cs" />
+    <Compile Include="http\GrandChildApiController.cs" />
     <Compile Include="http\routing\InheritanceDirectRouteProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebExtensions.cs" />

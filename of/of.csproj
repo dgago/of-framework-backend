@@ -41,6 +41,7 @@
     <Compile Include="Crypto.cs" />
     <Compile Include="data\DataExtensions.cs" />
     <Compile Include="data\IChildManager.cs" />
+    <Compile Include="data\IGrandChildManager.cs" />
     <Compile Include="data\IManager.cs" />
     <Compile Include="data\IStore.cs" />
     <Compile Include="data\Results.cs" />

@@ -30,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MongoDB.Bson, Version=2.4.3.23, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MongoDB.Bson.2.4.3\lib\net45\MongoDB.Bson.dll</HintPath>
+    <Reference Include="MongoDB.Bson, Version=2.4.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Bson.2.4.4\lib\net45\MongoDB.Bson.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -47,20 +47,23 @@
     <Compile Include="configuration\ISettingManager.cs" />
     <Compile Include="configuration\Setting.cs" />
     <Compile Include="configuration\SettingManager.cs" />
+    <Compile Include="diagnostics\ILogManager.cs" />
     <Compile Include="diagnostics\ILogProvider.cs" />
+    <Compile Include="diagnostics\Log.cs" />
+    <Compile Include="diagnostics\LogManager.cs" />
     <Compile Include="Support.cs" />
     <Compile Include="diagnostics\LogLevel.cs" />
     <Compile Include="diagnostics\SilentLogProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\of\of.csproj">
       <Project>{DF686015-D5C6-44C1-B270-E04579839989}</Project>
       <Name>of</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
