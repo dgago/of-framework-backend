@@ -10,25 +10,25 @@ namespace of.web.http
 {
 	public abstract class DefaultApiController<TItem, TKey> : BaseApiController
 	{
-		private readonly IManager<TItem, TKey> _manager;
+		protected readonly IManager<TItem, TKey> Manager;
 
 		public DefaultApiController(IManager<TItem, TKey> manager)
 		{
-			_manager = manager;
+			Manager = manager;
 		}
 
 		[PaginationFilter]
-		public async Task<IHttpActionResult> Get([FromUri] int? pageIndex = null, [FromUri] int? pageSize = null)
+		public virtual async Task<IHttpActionResult> Get([FromUri] int? pageIndex = null, [FromUri] int? pageSize = null)
 		{
 			IEnumerable<KeyValuePair<string, string>> qs = Request.GetQueryNameValuePairs();
-			Results<TItem> results = await _manager.FindAsync(User, qs, pageIndex ?? 1, pageSize ?? MAX_RECORDS);
+			Results<TItem> results = await Manager.FindAsync(User, qs, pageIndex ?? 1, pageSize ?? MAX_RECORDS);
 
 			return UseViewModel ? OkCount(GetViewModel(results)) : OkCount(results);
 		}
 
-		public async Task<IHttpActionResult> GetOne([FromUri] TKey id)
+		public virtual async Task<IHttpActionResult> GetOne([FromUri] TKey id)
 		{
-			TItem res = await _manager.FindOneAsync(User, id);
+			TItem res = await Manager.FindOneAsync(User, id);
 			if (res == null)
 			{
 				return NotFound();
@@ -37,21 +37,21 @@ namespace of.web.http
 			return Ok(UseViewModel ? GetViewModel(res) : res);
 		}
 
-		public async Task<IHttpActionResult> Post(TItem item)
+		public virtual async Task<IHttpActionResult> Post(TItem item)
 		{
-			TKey res = await _manager.CreateAsync(User, item);
+			TKey res = await Manager.CreateAsync(User, item);
 			return Created(res.ToString(), item);
 		}
 
-		public async Task<IHttpActionResult> Put([FromUri] TKey id, [FromBody] TItem item)
+		public virtual async Task<IHttpActionResult> Put([FromUri] TKey id, [FromBody] TItem item)
 		{
-			await _manager.ReplaceAsync(User, id, item);
+			await Manager.ReplaceAsync(User, id, item);
 			return NoContent();
 		}
 
-		public async Task<IHttpActionResult> Delete([FromUri] TKey id)
+		public virtual async Task<IHttpActionResult> Delete([FromUri] TKey id)
 		{
-			await _manager.DeleteAsync(User, id);
+			await Manager.DeleteAsync(User, id);
 			return NoContent();
 		}
 

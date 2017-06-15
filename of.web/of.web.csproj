@@ -106,6 +106,7 @@
     <Compile Include="controllers\VersionController.cs" />
     <Compile Include="http\BaseApiController.cs" />
     <Compile Include="http\ChildApiController.cs" />
+    <Compile Include="http\CustomMultipartFormDataStreamProvider.cs" />
     <Compile Include="http\DefaultApiController.cs" />
     <Compile Include="http\dependencies\ApiUnityDependencyResolver.cs" />
     <Compile Include="http\filter\OfExceptionFilterAttribute.cs" />

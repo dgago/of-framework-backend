@@ -51,6 +51,8 @@
     <Compile Include="diagnostics\ILogProvider.cs" />
     <Compile Include="diagnostics\Log.cs" />
     <Compile Include="diagnostics\LogManager.cs" />
+    <Compile Include="io\FileModel.cs" />
+    <Compile Include="io\IFileManager.cs" />
     <Compile Include="Support.cs" />
     <Compile Include="diagnostics\LogLevel.cs" />
     <Compile Include="diagnostics\SilentLogProvider.cs" />
@@ -65,6 +67,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

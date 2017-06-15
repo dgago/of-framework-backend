@@ -10,25 +10,25 @@ namespace of.web.http
 {
 	public abstract class GrandChildApiController<TItem, TKey> : BaseApiController
 	{
-		private readonly IGrandChildManager<TItem, TKey> _manager;
+		protected readonly IGrandChildManager<TItem, TKey> Manager;
 
 		public GrandChildApiController(IGrandChildManager<TItem, TKey> manager)
 		{
-			_manager = manager;
+			Manager = manager;
 		}
 
 		[PaginationFilter]
-		public async Task<IHttpActionResult> Get([FromUri] TKey id, [FromUri] TKey childId, [FromUri] int? pageIndex = null, [FromUri] int? pageSize = null)
+		public virtual async Task<IHttpActionResult> Get([FromUri] TKey id, [FromUri] TKey childId, [FromUri] int? pageIndex = null, [FromUri] int? pageSize = null)
 		{
 			IEnumerable<KeyValuePair<string, string>> qs = Request.GetQueryNameValuePairs();
-			Results<TItem> results = await _manager.Find(User, id, childId, qs, pageIndex ?? 1, pageSize ?? MAX_RECORDS);
+			Results<TItem> results = await Manager.Find(User, id, childId, qs, pageIndex ?? 1, pageSize ?? MAX_RECORDS);
 
 			return UseViewModel ? OkCount(GetViewModel(results)) : OkCount(results);
 		}
 
-		public async Task<IHttpActionResult> GetOne([FromUri] TKey id, [FromUri] TKey childId, [FromUri] TKey grandChildId)
+		public virtual async Task<IHttpActionResult> GetOne([FromUri] TKey id, [FromUri] TKey childId, [FromUri] TKey grandChildId)
 		{
-			TItem res = await _manager.FindOne(User, id, childId, grandChildId);
+			TItem res = await Manager.FindOne(User, id, childId, grandChildId);
 			if (res == null)
 			{
 				return NotFound();
@@ -36,21 +36,21 @@ namespace of.web.http
 			return Ok(res);
 		}
 
-		public async Task<IHttpActionResult> Post([FromUri] TKey id, [FromUri] TKey childId, TItem item)
+		public virtual async Task<IHttpActionResult> Post([FromUri] TKey id, [FromUri] TKey childId, TItem item)
 		{
-			TKey res = await _manager.Create(User, id, childId, item);
+			TKey res = await Manager.Create(User, id, childId, item);
 			return Created(res.ToString(), item);
 		}
 
-		public async Task<IHttpActionResult> Put([FromUri] TKey id, [FromUri] TKey childId, [FromUri] TKey grandChildId, [FromBody] TItem item)
+		public virtual async Task<IHttpActionResult> Put([FromUri] TKey id, [FromUri] TKey childId, [FromUri] TKey grandChildId, [FromBody] TItem item)
 		{
-			await _manager.Replace(User, id, childId, grandChildId, item);
+			await Manager.Replace(User, id, childId, grandChildId, item);
 			return NoContent();
 		}
 
-		public async Task<IHttpActionResult> Delete([FromUri] TKey id, [FromUri] TKey childId, [FromUri] TKey grandChildId)
+		public virtual async Task<IHttpActionResult> Delete([FromUri] TKey id, [FromUri] TKey childId, [FromUri] TKey grandChildId)
 		{
-			await _manager.Delete(User, id, childId, grandChildId);
+			await Manager.Delete(User, id, childId, grandChildId);
 			return NoContent();
 		}
 
