@@ -8,5 +8,7 @@ namespace of.support.io
 	public interface IFileManager : IManager<FileModel, string>
 	{
 		Task<string> GetDownloadUrlAsync(IPrincipal user, string id);
+
+		bool AllowDownloads { get; }
 	}
 }

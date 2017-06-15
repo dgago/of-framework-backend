@@ -49,5 +49,12 @@ namespace of.support.io
 		{
 			throw new NotImplementedException();
 		}
+
+		public Task<string> GetDownloadUrlAsync(IPrincipal user, string id)
+		{
+			throw new NotImplementedException();
+		}
+
+		public bool AllowDownloads => false;
 	}
 }

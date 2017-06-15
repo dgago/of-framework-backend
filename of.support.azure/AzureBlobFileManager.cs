@@ -115,5 +115,7 @@ namespace of.support.azure
 			string url = $"https://{_accountName}.blob.core.windows.net/{_containerName}/{id}";
 			return Task.FromResult(url);
 		}
+
+		public bool AllowDownloads => true;
 	}
 }
