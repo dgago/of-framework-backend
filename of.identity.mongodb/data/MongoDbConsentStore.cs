@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using IdentityServer3.Core.Models;
 using IdentityServer3.Core.Services;
 
+using MongoDB.Bson;
+
 using of.data;
 using of.identity.models;
 
@@ -40,7 +42,8 @@ namespace of.identity.data
 			}
 			else
 			{
-				await CreateAsync(new MongoDbConsent(consent));
+				MongoDbConsent c = new MongoDbConsent(consent) {Id = ObjectId.GenerateNewId().ToString()};
+				await CreateAsync(c);
 			}
 		}
 	}

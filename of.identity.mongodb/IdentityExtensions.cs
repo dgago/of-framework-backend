@@ -32,12 +32,20 @@ namespace of.identity
 
 		public static List<UserClaim> ToModel(this IEnumerable<Claim> claims)
 		{
+			if (claims == null)
+			{
+				return new List<UserClaim>();
+			}
 			List<UserClaim> res = claims.Select(x => new UserClaim(x)).ToList();
 			return res;
 		}
 
 		public static List<Claim> FromModel(this IEnumerable<UserClaim> claims)
 		{
+			if (claims == null)
+			{
+				return new List<Claim>();
+			}
 			List<Claim> res = claims.Select(arg => new Claim(arg.Type, arg.Value, arg.ValueType, arg.Issuer)).ToList();
 			return res;
 		}

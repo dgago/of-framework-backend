@@ -16,7 +16,8 @@ namespace of.identity.data
 
 		public async Task<Client> FindClientByIdAsync(string clientId)
 		{
-			return await FindOneAsync(clientId);
+			MongoDbClient client = await FindOneAsync(clientId);
+			return client;
 		}
 	}
 }

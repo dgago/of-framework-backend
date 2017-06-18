@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 
 using IdentityServer3.Core.Configuration;
+using IdentityServer3.Core.Models;
 
 using Microsoft.Owin;
 
@@ -24,7 +26,6 @@ namespace test.server.auth
 		{
 			Log.Logger = new LoggerConfiguration()
 				.WriteTo.RollingFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log", "log-{Date}.log"), shared: true)
-				//				.WriteTo.LiterateConsole(outputTemplate: "{Timestamp:HH:mm} [{Level}] ({Name:l}){NewLine} {Message}{NewLine}{Exception}")
 				.CreateLogger();
 
 			IdentityServerServiceFactory factory = new IdentityServerServiceFactory();

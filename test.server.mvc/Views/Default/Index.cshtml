@@ -1,0 +1,26 @@
+﻿@using System.Security.Claims
+
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>title</title>
+	</head>
+	<body>
+		<div>
+
+
+			<dl>
+			@foreach (Claim claim in ((IEnumerable<Claim>)Model))
+			{
+					<dt>@claim.Type</dt>
+					<dd>@claim.Value</dd>
+			}
+			</dl>
+		</div>
+	</body>
+</html>
