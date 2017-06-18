@@ -4,6 +4,8 @@ using IdentityServer3.AccessTokenValidation;
 
 using Microsoft.Owin;
 
+using of.support;
+using of.support.serilog;
 using of.web;
 
 using Owin;
@@ -18,6 +20,8 @@ namespace test.server.api
 	{
 		public void Configuration(IAppBuilder app)
 		{
+			Support.LogProvider = new SeriLogProvider();
+
 			// accept access tokens from identityserver and require a scope of 'api1'
 			app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
 			{

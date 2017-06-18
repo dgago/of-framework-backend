@@ -6,9 +6,9 @@ namespace of.data
 {
 	public interface IManager<TItem, TKey>
 	{
-		Task<Results<TItem>> FindAllAsync(IPrincipal user, int pageIndex, int pageSize);
+		Task<Results<TItem>> FindAllAsync(IPrincipal user, int pageIndex, int pageSize, string sortBy);
 
-		Task<Results<TItem>> FindAsync(IPrincipal user, IEnumerable<KeyValuePair<string, string>> query, int pageIndex, int pageSize);
+		Task<Results<TItem>> FindAsync(IPrincipal user, IEnumerable<KeyValuePair<string, string>> query, int pageIndex, int pageSize, string sortBy);
 
 		Task<TItem> FindOneAsync(IPrincipal user, TKey id);
 

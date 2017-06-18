@@ -6,9 +6,9 @@ namespace of.data
 {
 	public interface IGrandChildManager<TItem, TKey>
 	{
-		Task<Results<TItem>> FindAll(IPrincipal user, TKey grandParentId, TKey parentId, int pageIndex, int pageSize);
+		Task<Results<TItem>> FindAll(IPrincipal user, TKey grandParentId, TKey parentId, int pageIndex, int pageSize, string sortBy);
 
-		Task<Results<TItem>> Find(IPrincipal user, TKey grandParentId, TKey parentId, IEnumerable<KeyValuePair<string, string>> query, int pageIndex, int pageSize);
+		Task<Results<TItem>> Find(IPrincipal user, TKey grandParentId, TKey parentId, IEnumerable<KeyValuePair<string, string>> query, int pageIndex, int pageSize, string sortBy);
 
 		Task<TItem> FindOne(IPrincipal user, TKey grandParentId, TKey parentId, TKey childId);
 

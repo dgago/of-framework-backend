@@ -54,5 +54,9 @@ namespace of.data
 		void Remove(Expression<Func<TEntity, bool>> exp);
 
 		Task RemoveAsync(Expression<Func<TEntity, bool>> exp);
+
+
+
+		object GetSortObject(string sortBy);
 	}
 }

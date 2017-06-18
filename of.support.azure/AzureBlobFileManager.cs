@@ -49,12 +49,12 @@ namespace of.support.azure
 			_containerName = CloudConfigurationManager.GetSetting(containerKeyName);
 		}
 
-		public Task<Results<FileModel>> FindAllAsync(IPrincipal user, int pageIndex, int pageSize)
+		public Task<Results<FileModel>> FindAllAsync(IPrincipal user, int pageIndex, int pageSize, string sortBy)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<Results<FileModel>> FindAsync(IPrincipal user, IEnumerable<KeyValuePair<string, string>> query, int pageIndex, int pageSize)
+		public Task<Results<FileModel>> FindAsync(IPrincipal user, IEnumerable<KeyValuePair<string, string>> query, int pageIndex, int pageSize, string sortBy)
 		{
 			throw new NotImplementedException();
 		}

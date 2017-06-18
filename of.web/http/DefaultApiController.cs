@@ -18,10 +18,10 @@ namespace of.web.http
 		}
 
 		[PaginationFilter]
-		public virtual async Task<IHttpActionResult> Get([FromUri] int? pageIndex = null, [FromUri] int? pageSize = null)
+		public virtual async Task<IHttpActionResult> Get([FromUri] int? pageIndex = null, [FromUri] int? pageSize = null, [FromUri] string sortBy = null)
 		{
 			IEnumerable<KeyValuePair<string, string>> qs = Request.GetQueryNameValuePairs();
-			Results<TItem> results = await Manager.FindAsync(User, qs, pageIndex ?? 1, pageSize ?? MAX_RECORDS);
+			Results<TItem> results = await Manager.FindAsync(User, qs, pageIndex ?? 1, pageSize ?? MAX_RECORDS, sortBy);
 
 			return UseViewModel ? OkCount(GetViewModel(results)) : OkCount(results);
 		}

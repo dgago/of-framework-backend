@@ -57,6 +57,7 @@
     </Compile>
     <Compile Include="data\MongoDbContext.cs" />
     <Compile Include="data\MongoDbStore.cs" />
+    <Compile Include="MongoDbDataExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -148,6 +148,28 @@ namespace of.data
 			return Collection.DeleteManyAsync(exp);
 		}
 
+		public object GetSortObject(string sortBy)
+		{
+			object sort;
+			if (string.IsNullOrWhiteSpace(sortBy))
+			{
+				sort = null;
+			}
+			else if (sortBy.StartsWith("-"))
+			{
+				sort = sortBy.Substring(1).ToDynamic(-1);
+			}
+			else if (sortBy.StartsWith("+"))
+			{
+				sort = sortBy.Substring(1).ToDynamic(1);
+			}
+			else
+			{
+				sort = sortBy.ToDynamic(1);
+			}
+			return sort;
+		}
+
 		#region helpers
 
 		protected IFindFluent<TEntity, TEntity> FindFluent(Expression<Func<TEntity, bool>> exp, object sortBy = null)

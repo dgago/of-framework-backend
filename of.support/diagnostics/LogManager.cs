@@ -8,12 +8,12 @@ namespace of.support.diagnostics
 {
 	public class LogManager : ILogManager
 	{
-		public Task<Results<Log>> FindAllAsync(IPrincipal user, int pageIndex, int pageSize)
+		public Task<Results<Log>> FindAllAsync(IPrincipal user, int pageIndex, int pageSize, string sortBy)
 		{
 			throw new System.NotImplementedException();
 		}
 
-		public Task<Results<Log>> FindAsync(IPrincipal user, IEnumerable<KeyValuePair<string, string>> query, int pageIndex, int pageSize)
+		public Task<Results<Log>> FindAsync(IPrincipal user, IEnumerable<KeyValuePair<string, string>> query, int pageIndex, int pageSize, string sortBy)
 		{
 			throw new System.NotImplementedException();
 		}

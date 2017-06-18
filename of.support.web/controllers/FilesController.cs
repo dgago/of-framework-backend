@@ -11,15 +11,18 @@ using of.web.http;
 
 namespace of.support.web.controllers
 {
-	public class FilesController : DefaultApiController<FileModel, string>
+	public class FilesController : BaseApiController
 	{
 		private readonly string _workingFolder = Path.Combine(HttpRuntime.AppDomainAppPath, "temp", "u");
+		private readonly IFileManager _manager;
 
-		public FilesController(IFileManager manager) : base(manager)
+		public FilesController(IFileManager manager)
 		{
+			_manager = manager;
 		}
 
-		public override async Task<IHttpActionResult> Post(FileModel item)
+		[HttpPost]
+		public async Task<IHttpActionResult> Post()
 		{
 			// Check if the request contains multipart/form-data.
 			if (!Request.Content.IsMimeMultipartContent("form-data"))
@@ -43,7 +46,7 @@ namespace of.support.web.controllers
 					Contents = File.ReadAllBytes(file.LocalFileName),
 					Size = fileInfo.Length
 				};
-				string id = await Manager.CreateAsync(User, filem);
+				string id = await _manager.CreateAsync(User, filem);
 
 				files.Add(id);
 			}

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Security.Principal;
 using System.Threading.Tasks;
 
+using MongoDB.Driver;
 using MongoDB.Driver.GridFS;
 
 using of.data;
@@ -13,18 +15,24 @@ namespace of.support.io
 	{
 		private readonly GridFSBucket _bucket;
 
-		public MongoDbFileManager(GridFSBucket bucket)
+		public MongoDbFileManager(string connectionStringName)
 		{
-			_bucket = bucket;
+			MongoUrl url = new MongoUrl(ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString);
+			IMongoDatabase database = new MongoClient(url).GetDatabase(url.DatabaseName);
+			GridFSBucketOptions options = new GridFSBucketOptions
+			{
+				WriteConcern = WriteConcern.W1,
+				ReadPreference = ReadPreference.Secondary
+			};
+			_bucket = new GridFSBucket(database, options);
 		}
 
-
-		public Task<Results<FileModel>> FindAllAsync(IPrincipal user, int pageIndex, int pageSize)
+		public Task<Results<FileModel>> FindAllAsync(IPrincipal user, int pageIndex, int pageSize, string sortBy)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<Results<FileModel>> FindAsync(IPrincipal user, IEnumerable<KeyValuePair<string, string>> query, int pageIndex, int pageSize)
+		public Task<Results<FileModel>> FindAsync(IPrincipal user, IEnumerable<KeyValuePair<string, string>> query, int pageIndex, int pageSize, string sortBy)
 		{
 			throw new NotImplementedException();
 		}
