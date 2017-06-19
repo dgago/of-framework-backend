@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 
 using IdentityServer3.Core.Configuration;
-using IdentityServer3.Core.Models;
+using IdentityServer3.Core.Services;
 
 using Microsoft.Owin;
 
@@ -30,8 +29,11 @@ namespace test.server.auth
 
 			IdentityServerServiceFactory factory = new IdentityServerServiceFactory();
 
-			ServiceOptions options = new ServiceOptions { ConnectionStringName = "of.mongodb" };
-			factory.RegisterMongoDbServices(options);
+			// mongodb
+			factory.RegisterMongoDbServices(new ServiceOptions { ConnectionStringName = "of.mongodb" });
+
+			// spanish
+			factory.LocalizationService = new Registration<ILocalizationService, SpLocalizationService>();
 
 			app.UseIdentityServer(new IdentityServerOptions
 			{

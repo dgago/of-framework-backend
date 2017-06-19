@@ -47,10 +47,6 @@
       <HintPath>..\packages\IdentityServer3.2.6.0\lib\net45\IdentityServer3.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.3.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
@@ -137,6 +133,10 @@
     <ProjectReference Include="..\of.identity.mongodb\of.identity.mongodb.csproj">
       <Project>{7605BD9B-8B42-4043-A3C1-A143058D6111}</Project>
       <Name>of.identity.mongodb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\of.identity\of.identity.csproj">
+      <Project>{d19b8fc9-9a7a-45ba-9e8c-1fa907037f28}</Project>
+      <Name>of.identity</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
